@@ -11,6 +11,7 @@
 	<groupId>ezmicroservice</groupId>
 	<artifactId>loans</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>loans</name>
 	<description>Loan API Microservice</description>
 	<properties>
@@ -70,6 +71,9 @@
 				<configuration>
 					<image>
 						<name>trangbn/${project.artifactId}:v1</name>
+						<env>
+							<BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
+						</env>
 					</image>
 					<excludes>
 						<exclude>
@@ -81,5 +85,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
