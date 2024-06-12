@@ -14,3 +14,17 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+  config:
+    import:
+      - "application-prod.yml"
+      - "application-qa.yml"
+
+loans:
+  message: "Loans detail fetched from local APIs"
+  contactDetails:
+    name: "Robert Developer"
+    email: "trangbn580@gmail.com"
+  onCallSupport:
+    - (555)123-345
+    - (555)123-346

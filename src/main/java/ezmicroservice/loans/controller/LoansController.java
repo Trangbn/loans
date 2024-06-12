@@ -2,6 +2,7 @@ package ezmicroservice.loans.controller;
 
 import ezmicroservice.loans.constants.LoansConstants;
 import ezmicroservice.loans.dto.ErrorResponseDto;
+import ezmicroservice.loans.dto.LoanContactInfo;
 import ezmicroservice.loans.dto.LoansDto;
 import ezmicroservice.loans.dto.ResponseDto;
 import ezmicroservice.loans.service.ILoansService;
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +28,17 @@ import org.springframework.web.bind.annotation.*;
 )
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
-@AllArgsConstructor
 @Validated
 public class LoansController {
 
     private ILoansService iLoansService;
+
+    public LoansController(ILoansService loansService) {
+        this.iLoansService  = loansService;
+    }
+
+    @Autowired
+    private LoanContactInfo loanContactInfo;
 
     @Operation(
             summary = "Create Loan REST API",
@@ -158,5 +166,10 @@ public class LoansController {
                     .status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(LoansConstants.STATUS_417, LoansConstants.MESSAGE_417_DELETE));
         }
+    }
+
+    @GetMapping("/loan-contact-info")
+    public ResponseEntity<LoanContactInfo> getLoanContactInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(loanContactInfo);
     }
 }
