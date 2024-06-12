@@ -8,4 +8,3 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "loans")
 public record LoanContactInfo(String message, Map<String, String> contactDetails, List<String> onCallSupport) {
 }
-c
